@@ -10,31 +10,34 @@ interface ChatInputProps extends TextareaProps {
   ) => void;
   value: string;
   handleSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
-    chatRequestOptions?: ChatRequestOptions,
+    e: FormEvent<HTMLFormElement>,
+    chatRequestOptions?: ChatRequestOptions | undefined,
   ) => void;
 }
 function ChatInput({ handleSubmit, value, handleInputChange }: ChatInputProps) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
   return (
     <Textarea
       ref={textAreaRef}
-      className="pr-12 overflow-y-hidden"
+      className="overflow-y-hidden pr-12"
       value={value}
       onKeyDown={async (e) => {
         if (e.key === "Enter") {
+          //@ts-ignore
           handleSubmit(e);
         }
       }}
       onChange={(e) => {
-        if (e.target.value === "") {
-          textAreaRef.current.style.height = "40px";
+        if (textAreaRef.current) {
+          if (e.target.value === "") {
+            textAreaRef.current.style.height = "40px";
+          }
+          const scrollHeight = textAreaRef.current?.scrollHeight;
+          if (scrollHeight > 40) {
+            textAreaRef.current.style.height = `${scrollHeight}px`;
+          }
+          handleInputChange(e);
         }
-        const scrollHeight = textAreaRef.current?.scrollHeight;
-        textAreaRef.current.style.height =
-          scrollHeight > 40 && `${scrollHeight}px`;
-        handleInputChange(e);
       }}
       required
       placeholder="Ask me anything..."
