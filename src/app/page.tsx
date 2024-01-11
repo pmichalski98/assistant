@@ -2,34 +2,39 @@
 import { useChat } from "ai/react";
 import ChatHeader from "@/components/ChatHeader";
 import ChatInput from "@/components/ChatInput";
-import { Moon } from "lucide-react";
+import { Moon, SendIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
+import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   return (
-    <main className="flex min-h-screen flex-col justify-between p-14 text-xl ">
-      <ToggleThemeButton />
-      <ChatHeader />
-      <div className="stretch mx-auto flex w-full max-w-md flex-col py-24">
-        {messages.map((m) => (
-          <div key={m.id} className="whitespace-pre-wrap">
-            {m.role === "user" ? "User: " : "AI: "}
-            {m.content}
-          </div>
-        ))}
-
-        <form onSubmit={handleSubmit}>
-          <ChatInput
-            className="fixed bottom-0 mb-8 w-full max-w-md rounded border border-gray-300 p-2 shadow-xl"
-            value={input}
-            placeholder="Say something..."
-            handleSubmit={handleSubmit}
-            handleInputChange={handleInputChange}
-          />
-        </form>
+    <main className=" flex min-h-screen flex-col justify-between px-4 pb-10">
+      <div>
+        <Navbar />
+        <div className="">
+          <ChatHeader />
+          {messages.map((m) => (
+            <div key={m.id} className="whitespace-pre-wrap">
+              {m.role === "user" ? "User: " : "AI: "}
+              {m.content}
+            </div>
+          ))}
+        </div>
       </div>
+      <form onSubmit={handleSubmit} className="relative ">
+        <ChatInput
+          value={input}
+          placeholder="Say something..."
+          handleSubmit={handleSubmit}
+          handleInputChange={handleInputChange}
+        />
+        <Button size="icon" className="absolute bottom-0 right-0">
+          <SendIcon />
+        </Button>
+      </form>
     </main>
   );
 }

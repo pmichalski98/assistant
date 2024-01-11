@@ -7,7 +7,10 @@ function ToggleThemeButton() {
   const isLight = theme === "light";
 
   return (
-    <button onClick={() => setTheme(isLight ? "dark" : "light")}>
+    <button
+      className="rounded-full p-1 shadow ring ring-secondary"
+      onClick={() => setTheme(isLight ? "dark" : "light")}
+    >
       {isLight ? <Moon size="20" /> : <Sun size="20" />}
     </button>
   );

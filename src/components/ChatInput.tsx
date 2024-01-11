@@ -14,12 +14,17 @@ interface ChatInputProps extends TextareaProps {
     chatRequestOptions?: ChatRequestOptions | undefined,
   ) => void;
 }
-function ChatInput({ handleSubmit, value, handleInputChange }: ChatInputProps) {
+function ChatInput({
+  handleSubmit,
+  value,
+  handleInputChange,
+  ...props
+}: ChatInputProps) {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   return (
     <Textarea
       ref={textAreaRef}
-      className="overflow-y-hidden pr-12"
+      className="h-[40px] w-full overflow-y-hidden rounded p-2 pr-12 shadow-xl"
       value={value}
       onKeyDown={async (e) => {
         if (e.key === "Enter") {
@@ -41,6 +46,7 @@ function ChatInput({ handleSubmit, value, handleInputChange }: ChatInputProps) {
       }}
       required
       placeholder="Ask me anything..."
+      {...props}
     />
   );
 }
