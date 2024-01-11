@@ -2,11 +2,15 @@
 import { useChat } from "ai/react";
 import ChatHeader from "@/components/ChatHeader";
 import ChatInput from "@/components/ChatInput";
+import { Moon } from "lucide-react";
+import { useTheme } from "next-themes";
+import ToggleThemeButton from "@/components/ToggleThemeButton";
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   return (
     <main className="flex min-h-screen flex-col justify-between p-14 text-xl ">
+      <ToggleThemeButton />
       <ChatHeader />
       <div className="stretch mx-auto flex w-full max-w-md flex-col py-24">
         {messages.map((m) => (
