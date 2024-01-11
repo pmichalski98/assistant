@@ -1,8 +1,8 @@
 import React, { FormEvent, useRef } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea, TextareaProps } from "@/components/ui/textarea";
 import { ChatRequestOptions } from "ai";
 
-interface ChatInputProps {
+interface ChatInputProps extends TextareaProps {
   handleInputChange: (
     e:
       | React.ChangeEvent<HTMLInputElement>
