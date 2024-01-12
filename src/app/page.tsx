@@ -7,19 +7,20 @@ import { useTheme } from "next-themes";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
+import Markdown from "react-markdown";
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   return (
-    <main className=" flex min-h-screen flex-col justify-between px-4 pb-10">
+    <main className=" flex min-h-screen flex-col justify-between overflow-hidden px-4 pb-10">
       <div>
         <Navbar />
         <div className="">
           <ChatHeader />
           {messages.map((m) => (
-            <div key={m.id} className="whitespace-pre-wrap">
+            <div key={m.id} className=" whitespace-pre-wrap">
               {m.role === "user" ? "User: " : "AI: "}
-              {m.content}
+              <Markdown>{m.content}</Markdown>
             </div>
           ))}
         </div>
