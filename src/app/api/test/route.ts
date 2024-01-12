@@ -2,7 +2,8 @@
 import requestIp from "request-ip";
 
 export async function POST(req: Request) {
-  console.log(requestIp(req));
+  const ip = requestIp(req);
   //@ts-ignore
-  console.log(req.socket.remoteAddress);
+  const ip2 = req.socket.remoteAddress;
+  return { ip2, ip };
 }
