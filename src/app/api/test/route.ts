@@ -5,5 +5,5 @@ export async function POST(req: Request) {
   const ip = requestIp(req);
   //@ts-ignore
   const ip2 = req.socket.remoteAddress;
-  return { ip2, ip };
+  return Response.json({ ip2, ip });
 }
