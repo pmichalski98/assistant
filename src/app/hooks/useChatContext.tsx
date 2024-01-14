@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+"use client";
+import { useContext } from "react";
 import { ChatContext } from "@/store/store";
 
 function UseChatContext() {
