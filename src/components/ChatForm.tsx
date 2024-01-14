@@ -11,7 +11,7 @@ function ChatForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative max-h-52 overflow-y-scroll "
+      className="relative max-h-[60px] overflow-hidden"
     >
       <ChatInput
         value={input}

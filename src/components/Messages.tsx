@@ -1,12 +1,22 @@
 "use client";
 import Markdown from "react-markdown";
 import UseChatContext from "@/app/hooks/useChatContext";
+import { useEffect, useRef } from "react";
 
 function Messages() {
   const { messages } = UseChatContext();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
   return (
-    <div className=" h-full overflow-y-auto ">
+    <div
+      ref={scrollRef}
+      className=" h-auto max-h-[500px] overflow-y-auto bg-background "
+    >
       {messages.map((m) => (
         <div
           key={m.id}

@@ -24,7 +24,7 @@ function ChatInput({
   return (
     <Textarea
       ref={textAreaRef}
-      className="h-[40px] w-full overflow-y-hidden rounded p-2 pr-12 shadow-xl"
+      className="h-auto min-h-10 w-full resize-none  overflow-y-scroll rounded p-2 pr-12 shadow-xl"
       value={value}
       onKeyDown={async (e) => {
         if (e.key === "Enter") {
@@ -38,7 +38,9 @@ function ChatInput({
             textAreaRef.current.style.height = "40px";
           }
           const scrollHeight = textAreaRef.current?.scrollHeight;
+          console.log(scrollHeight);
           if (scrollHeight > 40) {
+            textAreaRef.current.style.height = `auto`;
             textAreaRef.current.style.height = `${scrollHeight}px`;
           }
           handleInputChange(e);

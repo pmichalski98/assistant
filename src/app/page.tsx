@@ -7,7 +7,7 @@ export default function Home() {
     <div className="h-screen ">
       <Header />
       <main className=" px-4  ">
-        <section className="mb-20 h-[900px] bg-background ">
+        <section className=" mb-20">
           <Messages />
         </section>
         <section className="fixed bottom-0 right-0 z-10 mx-auto max-h-52 w-full overflow-y-auto bg-background p-4 ">
