@@ -1,21 +1,33 @@
 "use client";
 import Markdown from "react-markdown";
 import UseChatContext from "@/app/hooks/useChatContext";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Messages() {
   const { messages } = UseChatContext();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollTrigger, setScrollTrigger] = useState(true);
+
+  function autoScroll(trigger: boolean) {
+    if (trigger) {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }
+    }
+  }
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
+    autoScroll(scrollTrigger);
   }, [messages]);
   return (
     <div
       ref={scrollRef}
-      className=" h-auto max-h-[500px] overflow-y-auto bg-background "
+      onClick={(e) => {
+        console.log(e);
+        setScrollTrigger(false);
+      }}
+      onMouseLeave={() => setScrollTrigger(true)}
+      className=" h-auto max-h-[1000px] overflow-y-auto bg-background "
     >
       {messages.map((m) => (
         <div
