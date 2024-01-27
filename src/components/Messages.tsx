@@ -27,7 +27,7 @@ function Messages() {
         setScrollTrigger(false);
       }}
       onMouseLeave={() => setScrollTrigger(true)}
-      className=" h-auto max-h-[1000px] overflow-y-auto bg-background "
+      className=" h-auto  overflow-y-auto bg-background "
     >
       {messages.map((m) => (
         <div

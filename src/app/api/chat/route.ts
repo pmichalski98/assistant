@@ -6,9 +6,7 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: Request) {
-  const test = await req.json();
-  console.log(test);
-  const { messages, model } = test;
+  const { messages, model } = await req.json();
   const response = await openai.chat.completions.create({
     model,
     stream: true,
@@ -16,6 +14,5 @@ export async function POST(req: Request) {
   });
 
   const stream = OpenAIStream(response);
-
   return new StreamingTextResponse(stream);
 }
